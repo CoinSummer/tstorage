@@ -61,6 +61,10 @@ func (m *memoryPartition) insertRows(rows []Row) ([]Row, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to write to WAL: %w", err)
 	}
+	err = m.wal.flush()
+	if err != nil {
+		return nil, fmt.Errorf("failed to flush WAL: %w", err)
+	}
 
 	// Set min timestamp at only first.
 	m.once.Do(func() {
