@@ -206,7 +206,7 @@ func (m *memoryMetric) insertPoint(point *DataPoint) {
 		return
 	}
 	// Insert point in order
-	if m.points[size-1].Timestamp < point.Timestamp {
+	if m.points[size-1].Timestamp <= point.Timestamp {
 		m.points = append(m.points, point)
 		atomic.StoreInt64(&m.maxTimestamp, point.Timestamp)
 		atomic.AddInt64(&m.size, 1)
