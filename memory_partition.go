@@ -217,7 +217,7 @@ func (m *memoryMetric) insertPoint(point *DataPoint) {
 }
 
 func (m *memoryMetric) selectNPoints(n int64) []*DataPoint {
-	if n == 0 {
+	if n <= 0 {
 		return []*DataPoint{}
 	}
 	if m.size < n {
